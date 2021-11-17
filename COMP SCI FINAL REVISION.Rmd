@@ -1,0 +1,73 @@
+---
+title: 'Project 1: Data Visualization'
+author: "David Peterson"
+date: "10/27/2021"
+output:
+  html_document:
+    df_print: paged
+---
+Peers' Comments: 
+
+The visual is very visually easy to digest, and the legend made it really easy to follow. Maybe add that the x axsis is time in minutes.
+
+Things done well: - Red and blue is good contrast in terms of coloring - Good and clear centralized key/not lost in periphery Perhaps improve these things: - Please label the Y axis with a title - What unit is time in on the X axis, perhaps include this in parenthetical on the axis title.
+
+You did well having an easy-to-read visualization, for example, the red and blue data looks good on the white background and you can easily read the x and y-axis. Maybe move the legend to the top right because it somewhat is distracting from the data that is right there; it is almost covering the data and you should capitalize it.
+
+Good clear colors, high contrast background. Good clear plots. Consider combining these into high and low estimates into one plot. Be sure to put mins in the x. should go to 0 on y-axis.
+
+Addressing these comments, regarding the first peer comment: I added the minutes onto the X-Axis Title for easier understanding of the graph and legibility as well. Regarding the second comment made on my project, I labeled the Y-Axis with a title and also added minutes to the X-Axis as well. This was a fairly straight-forward fix. Regarding the third comment, I moved my legend so that it is much easier to see and does not block any data whatsoever. I also made sure to capitalize it as well. Lastly, I successfully addressed Dr. Waldrop's comments by creating another plot that shows both the low and high estimates of Donald Trump's approval rating. I also made sure to put minutes on the x axis for my first two graphs, as suggested previously. I also made the new graph's Y axis start at 0 as well. All of the comments have successfully been addressed. 
+
+
+```{r}
+read.csv("Project.csv")
+approval <- read.csv("Project.csv")
+#approval
+```
+```{r}
+library(tidyr)
+library(janitor)
+library(dplyr)
+library(lubridate)
+
+approvalcleaned <- select(approval, c(approve_hi, disapprove_hi, timestamp))
+#approvalcleaned
+```
+```{r}
+x1 <- (1:4377)
+y1 <- (approvalcleaned$approve_hi)
+
+plot(x = x1, y = y1, data = approvalcleaned, 
+     type = "l", col="blue", ylim = c(0,80), xlab = "Time In Minutes Progressing as Poll Is Open", ylab = "Approval and Disapproval Ratings In Percent", main = "Approval Rating of President Donald J. Trump, High Estimates")
+lines(x=(1:4377), y = approvalcleaned$disapprove_hi, col = "red")
+legend("bottomright", legend= c("Approve", "Disapprove"), col = c("blue", "red"), pch = 16)
+
+```
+```{r}
+approvalcleaned2 <- select(approval, c(approve_lo, disapprove_lo, timestamp))
+approvalcleaned2
+
+x2 <- (1:4377)
+y2 <- (approvalcleaned2$approve_lo)
+
+plot(x = x2, y = y2, data = approvalcleaned2, type = "l", col="blue", ylim = c(20,80), xlab = "Time Progressing as Poll Is Open In Minutes", ylab = "Approval and Disapproval Ratings Percentages", main = "Approval Rating of President Donald J. Trump, Low Estimates")
+lines(x=(1:4377), y = approvalcleaned2$disapprove_lo, col = "red")
+legend("topright", legend= c("Approve", "Disapprove"), col = c("blue", "red"), pch = 16)
+```
+David Peterson
+CPSC 292-1
+
+```{r}
+library(ggplot2)
+ggplot(approval, aes(x = seq(1,nrow(approval)), 
+                     y = approve_estimate)) + 
+  geom_line(color="blue") + 
+  geom_ribbon(aes(ymin=approve_lo, ymax=approve_hi), fill="blue", alpha=0.5) +
+  geom_line(aes(y=disapprove_estimate), color="red")+
+  geom_ribbon(aes(ymin=disapprove_lo, ymax=disapprove_hi), fill="red", alpha=0.5) +
+  ggtitle("High & Low Approval Ratings")+
+xlab("Time in Minutes The Poll is Open")+
+ylab("Precentage of Approval")+
+  ylim(0,80)+
+  theme_minimal()
+```
