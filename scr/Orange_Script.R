@@ -1,0 +1,33 @@
+
+library(ggplot2)
+data("Orange")
+
+plot.circ <- function(cutoff){
+  Orange$circumference.above <- ifelse(Orange$circumference > cutoff, 
+                                       Orange$circumference, NA)
+  data <- cbind(1:5); 
+  data1 <- cbind(15:20)
+  data2 <- cbind(25:30)
+  
+  for (i in 1:nrow(data)) {
+    if (i == 1) {
+      print("i is 1")
+    } else {
+      print("i is not 1")
+    }
+    for (j in 1:nrow(data1)) {
+      print(paste("FOR 2: ", j))
+      for (k in 1:nrow(data2)) {
+        cat(paste("FOR 3: ", k, "\n"))
+      }
+    }
+  }
+  ggplot(Orange, aes(age, circumference, color=Tree)) + 
+    geom_point(size=4, alpha=0.1) + 
+    geom_point(aes(x= age, y = circumference.above, color=Tree), size = 4, alpha = 1, inherit.aes = FALSE) + 
+    theme_minimal()
+}
+
+plot.circ(150)
+plot.circ(50)
+
