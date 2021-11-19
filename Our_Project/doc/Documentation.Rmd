@@ -1,8 +1,0 @@
----
-title: "Documentation"
-author: "David Peterson and Annie Kelly"
-date: "11/18/2021"
-output: html_document
----
-#Documentation
-The individual functions of this project were our three elements we chose to work with. These were a function, loop, and condiitonal statement. Together, these three elements worked in unison to help organize the data set "orange" and allow us to dictate the visualizations produced by it. Our major input for the project was the data we received from the data set ‘Orange.’ However, we commanded the data to be graphed and exclude certain values based off of our own prerogatives. These are showing oranges by age and circumference. The major outputs were the two plots we have in our project and their data points, and what they are. Regarding the individual functions of the project, the function we had separated the data and made sure that we were only working with the numbers we wanted to work with. The coniditional statement then built upon that by providing an if-then style format which separated the data even further. Lastly, we used a loop to assign numbers to certain values for the orange data set as shown. All of these three elements of our project work in unison to allow us to have an accurate representation of our data. 
